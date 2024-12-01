@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>칼로리 소모량 예측 (스태킹 모델)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_final.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>운동 칼로리 소모량 예측기 v2</h1>
+        <p class="subtitle">스태킹 모델 기반</p>
+        
+        <form id="prediction-form">
+            <div class="input-group duration">
+                <label for="exercise_duration">
+                    운동 시간 (분)
+                    <span class="example-value">예: 15</span>
+                </label>
+                <input type="number" id="exercise_duration" name="exercise_duration" 
+                       required min="1" step="0.1" placeholder="15">
+                <div class="range-info">운동 시간을 분 단위로 입력하세요</div>
+            </div>
+
+            <div class="input-group">
+                <label for="body_temp">
+                    체온 (°C)
+                    <span class="input-range">35~42°C</span>
+                    <span class="example-value">예: 36.5</span>
+                </label>
+                <input type="number" id="body_temp" name="body_temp" 
+                       required min="35" max="42" step="0.1" placeholder="36.5">
+                <div class="range-info">정상 체온: 36.5-37.5°C</div>
+            </div>
+
+            <div class="input-group">
+                <label for="bpm">
+                    심박수 (BPM)
+                    <span class="input-range">60~200 BPM</span>
+                    <span class="example-value">예: 80</span>
+                </label>
+                <input type="number" id="bpm" name="bpm" 
+                       required min="60" max="200" placeholder="80">
+                <div class="range-info">안정시 심박수: 60-100 BPM</div>
+            </div>
+
+            <div class="input-group">
+                <label for="height">
+                    신장 (cm)
+                    <span class="input-range">120~220cm</span>
+                    <span class="example-value">예: 170</span>
+                </label>
+                <input type="number" id="height" name="height" 
+                       required min="120" max="220" placeholder="170">
+                <div class="range-info">평균 신장: 남성 171cm, 여성 158cm</div>
+            </div>
+
+            <div class="input-group">
+                <label for="weight">
+                    체중 (kg)
+                    <span class="input-range">30~200kg</span>
+                    <span class="example-value">예: 65</span>
+                </label>
+                <input type="number" id="weight" name="weight" 
+                       required min="30" max="200" step="0.1" placeholder="65">
+                <div class="range-info">건강 체중 범위를 확인하세요</div>
+            </div>
+
+            <div class="input-group">
+                <label for="gender">성별</label>
+                <select id="gender" name="gender" required>
+                    <option value="M">남성</option>
+                    <option value="F">여성</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="age">나이</label>
+                <input type="number" id="age" name="age" required min="20" max="80">
+            </div>
+
+            <button type="submit">예측하기</button>
+        </form>
+
+        <div id="result" class="hidden">
+            <h2>예측 결과</h2>
+            <div class="result-item">
+                <p>예상 칼로리 소모량: <span id="calories"></span> kcal</p>
+            </div>
+            <div class="result-item">
+                <p>BMI: <span id="bmi"></span></p>
+                <p>BMI 상태: <span id="bmi-status"></span></p>
+            </div>
+            <button type="button" id="reset-button" class="reset-button">다시하기</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script_final.js') }}"></script>
+</body>
+</html> 

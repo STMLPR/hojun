@@ -1,0 +1,212 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --success-color: #27ae60;
+    --error-color: #e74c3c;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%);
+    --gradient-success: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    --gradient-danger: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--gradient-primary);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 0;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.input-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+input, select {
+    width: calc(100% - 2rem);  /* 패딩 고려 */
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+}
+
+.example-value, .input-range {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: normal;
+}
+
+.example-value {
+    background: var(--gradient-success);
+    color: white;
+}
+
+.input-range {
+    background: var(--gradient-secondary);
+    color: white;
+}
+
+.range-info {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+    opacity: 0.8;
+    padding-left: 0.5rem;
+    border-left: 3px solid var(--secondary-color);
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 1.2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+    color: white;
+    background: var(--gradient-secondary);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.example-button {
+    background: var(--gradient-success);
+}
+
+.reset-button {
+    background: var(--gradient-danger);
+}
+
+#result {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #f6f9fc 0%, #f1f5f9 100%);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+    transition: all 0.3s ease;
+}
+
+#result:hover {
+    transform: scale(1);
+}
+
+.result-item {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-3px);
+}
+
+.result-item p {
+    margin: 0.8rem 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.result-item span {
+    font-weight: 700;
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 5px;
+}
+
+@media (max-width: 850px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .input-group {
+        padding: 1rem;
+    }
+    
+    label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    input, select {
+        width: calc(100% - 1.5rem);
+        padding: 0.8rem;
+    }
+}
