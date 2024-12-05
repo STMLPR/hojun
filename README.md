@@ -1,12 +1,13 @@
-# 운동 칼로리 소모량 예측 웹 서비스
+# 운동 칼로리 소모량 예측 웹 서비스 v2
 
 운동 시간, 체온, 심박수 등의 데이터를 기반으로 운동 중 소모된 칼로리를 예측하는 웹 서비스입니다.
+스태킹 앙상블 모델을 사용하여 더 정확한 예측을 제공합니다.
 
 ## 시작하기
 
 ### 필수 요구사항
 
-- Python 3.8 이상
+- Python 3.9
 - pip (Python 패키지 관리자)
 
 ### 설치 방법
@@ -19,19 +20,12 @@
 
 ## 실행 방법
 
-### 1. 모델 학습
-    python train_model.py
-- 실행 후 생성되는 파일들:
-  - `model.pkl`: 학습된 LightGBM 모델
-  - `preprocessor.pkl`: 데이터 전처리기
-  - `submission.csv`: 테스트 데이터 예측 결과
 
-### 2. 웹 서비스 실행
+1. 웹 서비스 실행
     python app.py
     - 실행 후 http://localhost:5000 접속
 
 ## 입력 데이터 범위
-
 | 입력 항목 | 단위 | 허용 범위 |
 |---------|------|----------|
 | 운동 시간 | 분 | 1~120 |
@@ -41,84 +35,71 @@
 | 체중 | kg | 40~120 |
 | 나이 | 세 | 15~80 |
 | 성별 | - | 남성/여성 |
-| 체중상태 | - | 정상/과체중 |
 
 ## 프로젝트 구조
 exercise-calories-prediction/
-├── app.py # Flask 웹 서버
-├── train_model.py # 모델 학습 스크립트
-├── templates/ # HTML 템플릿
-│ └── index.html # 메인 페이지
-├── model.pkl # 학습된 모델 (생성됨)
-├── preprocessor.pkl # 전처리기 (생성됨)
-├── requirements.txt # 필요한 패키지 목록
-└── README.md # 프로젝트 설명
+├── app_final.py # Flask 웹 서버 (스태킹 모델)
+├── finalModel.ipynb # 모델 학습 노트북
+├── final_model.pkl # 학습된 스태킹 모델
+├── templates/
+│ └── index_final.html # 메인 페이지
+├── static/
+│ ├── css/
+│ │ └── style_final.css
+│ └── js/
+│ └── script_final.js
+└── README.md
 
 
-## 주요 파일 설명
 
-### 1. train_model.py
-- 데이터 전처리 및 변환 (단위 변환: 영국식 → 미터법)
-- LightGBM 모델 학습 (최적 하이퍼파라미터 적용)
-- 모델 및 전처리기 저장
+## 사용된 모델
 
-### 2. app.py
-- Flask 웹 서버 구현
-- 모델 및 전처리기 로드
-- BMI 계산 및 체중상태 판정
-- 예측 API 엔드포인트 제공
+스태킹 앙상블 모델에 사용된 기본 모델들:
+1. Linear Regression
+2. Ridge Regression
+3. Random Forest (n_estimators=50)
+4. XGBoost (n_estimators=100)
+5. LightGBM (n_estimators=100)
+6. SVR (kernel='rbf')
+7. Elastic Net (alpha=1.0, l1_ratio=0.5)
+8. Neural Network (MLP)
+9. KNN (n_neighbors=5)
 
-### 3. index.html
-- 반응형 웹 디자인 (Bootstrap 5)
-- 실시간 입력값 검증
-- AJAX를 통한 비동기 예측 요청
-- 예측 결과 및 BMI 정보 표시
+## 전처리 과정
+
+1. 단위 변환
+   - 체온: °C → °F
+   - 체중: kg → lb
+   - 신장: cm → feet & inches
+
+2. 특성 생성
+   - PolynomialFeatures(degree=3)로 고차항 생성
+   - SelectKBest로 상위 40개 특성 선택
 
 ## 기술 스택
 
 - **Backend**
   - Flask 2.0.1
-  - Python 3.8+
+  - Python 3.9
 
 - **Frontend**
   - HTML5/CSS3
-  - JavaScript (jQuery)
-  - Bootstrap 5.1.3
+  - JavaScript (Vanilla JS)
 
 - **Machine Learning**
+  - scikit-learn 1.5.2
+  - XGBoost 1.5.0
   - LightGBM 3.3.2
-  - scikit-learn 0.24.2
   - pandas 1.3.3
-  - numpy 1.21.2
+  - numpy 1.23.0
 
-## 문제 해결
+## 팀원
 
-### 자주 발생하는 오류
-
-1. ModuleNotFoundError
-   - 해결: `pip install -r requirements.txt` 실행
-
-2. 모델 파일 없음 오류
-   - 해결: `python train_model.py` 실행하여 모델 생성
-
-3. 포트 충돌
-   - 해결: app.py에서 다른 포트 번호 지정
-   ```python
-   app.run(port=다른_포트번호)
-   ```
-
-## 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다.
-
-## 작성자
-
-- 이름: 이호준
-- GitHub: https://github.com/Nutcracker5286
+- 이름: 임나경, 이호준, 조세은
 
 ## 업데이트 내역
 
-- v1.0.0 (2024-03-21)
-  - 최초 릴리즈
-  - SI 단위계 적용
-  - 웹 인터페이스 구현
+- v2.0.0 (2024-03-21)
+  - 스태킹 모델 적용
+  - 전처리 과정 개선
+  - UI/UX 개선
