@@ -37,18 +37,20 @@
 | 성별 | - | 남성/여성 |
 
 ## 프로젝트 구조
-exercise-calories-prediction/
-├── app_final.py # Flask 웹 서버 (스태킹 모델)
-├── finalModel.ipynb # 모델 학습 노트북
-├── final_model.pkl # 학습된 스태킹 모델
-├── templates/
-│ └── index_final.html # 메인 페이지
+```
+calories-prediction/
+├── app_final.py          # Flask 웹 서버 (스태킹 모델)
+├── finalModel.ipynb      # 모델 학습 노트북
+├── final_model.pkl       # 학습된 스태킹 모델
+├── templates/           
+│   └── index_final.html  # 메인 페이지
 ├── static/
-│ ├── css/
-│ │ └── style_final.css
-│ └── js/
-│ └── script_final.js
+│   ├── css/
+│   │   └── style_final.css
+│   └── js/
+│       └── script_final.js
 └── README.md
+```
 
 
 
